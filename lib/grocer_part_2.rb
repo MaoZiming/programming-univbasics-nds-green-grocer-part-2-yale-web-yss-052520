@@ -9,7 +9,11 @@ def apply_coupons(cart, coupons)
   while i < s do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
-    if h!= nil && h[:num] < cart[i][:count]
+    if h == nil
+      i += 1
+      next
+    end
+    elsif h[:num] < cart[i][:count]
       remainder = cart[i][:count] % h[:num]
       divisor = cart[i][:count]/h[:num]
 
