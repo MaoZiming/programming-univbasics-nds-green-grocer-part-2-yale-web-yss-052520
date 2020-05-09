@@ -5,7 +5,8 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   i = 0
-  while i < cart.size do
+  s = cart.size
+  while i < s do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
     if h!= nil && h[:num] < cart[i][:count]
@@ -23,13 +24,13 @@ def apply_coupons(cart, coupons)
         :count=>divisor*h[:num]
       }
       cart << add_h
-
-
     end
     i += 1
   end
   cart
 end
+
+
 
 def apply_clearance(cart)
   # Consult README for inputs and outputs
