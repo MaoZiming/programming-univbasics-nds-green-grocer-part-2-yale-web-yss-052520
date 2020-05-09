@@ -5,15 +5,10 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   i = 0
-  s = cart.size
-  while i < s do
+  while i < cart.size do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
-    if h == nil
-      i += 1
-      next
-    end
-    elsif h[:num] < cart[i][:count]
+    if h!= nil && h[:num] <= cart[i][:count]
       remainder = cart[i][:count] % h[:num]
       divisor = cart[i][:count]/h[:num]
 
@@ -28,6 +23,8 @@ def apply_coupons(cart, coupons)
         :count=>divisor*h[:num]
       }
       cart << add_h
+
+
     end
     i += 1
   end
