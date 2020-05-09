@@ -5,7 +5,6 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   i = 0
-  cart = consolidate_cart(cart)
   while i < cart.size do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
@@ -15,13 +14,15 @@ def apply_coupons(cart, coupons)
 
       new_h = cart[i]
       new_h[:count] = remainder
-      cart[i] = new_h
+      # cart[i] = new_h
 
-      add_h = new_h
-      add_h[:price] = h[:cost]/h[:num]
-      add_h[:count]=divisor*h[:num]
-      add_h[:item] = add_h[:item]+" W/COUPON"
-      cart <<add_h
+      add_h = {
+        :item=>cart[i][:item]+" W/COUPON",
+        :price=>h[:cost]/h[:num],
+        :clearance=>cart[i][:clearance],
+        :count=>divisor*h[:num]
+      }
+      cart << add_h
 
 
     end
