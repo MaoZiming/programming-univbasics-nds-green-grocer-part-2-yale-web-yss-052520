@@ -8,16 +8,17 @@ def apply_coupons(cart, coupons)
   while i < cart.size do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
-    if h[:num] < cart[i][:count]
+    if h!= nil && h[:num] < cart[i][:count] 
       remainder = cart[i][:count] % h[:num]
       divisor = cart[i][:count]/h[:num]
+      
       new_h = cart[i]
       new_h[:count] = remainder
       cart[i] = new_h
 
       add_h = new_h
       add_h[:price] = h[:cost]/h[:num]
-      add_h[:count]=divisor *h[:num]
+      add_h[:count]=divisor*h[:num]
       add_h[:item] = add_h[:item]+" W/COUPON"
       cart <<add_h
 
