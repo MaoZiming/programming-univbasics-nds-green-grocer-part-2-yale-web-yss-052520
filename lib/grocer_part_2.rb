@@ -5,6 +5,7 @@ def apply_coupons(cart, coupons)
   #
   # REMEMBER: This method **should** update cart
   i = 0
+  cart = consolidate_cart(cart)
   while i < cart.size do
     name = cart[i][:item]
     h = find_item_by_name_in_collection(name, coupons)
